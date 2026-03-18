@@ -15,8 +15,6 @@ interface WishlistButtonProps {
 const WishlistButton = ({ id, image }: WishlistButtonProps) => {
   const trpc = useTRPC();
   const router = useRouter();
-  const queryClient = useQueryClient();
-
   const { data = [] } = useQuery(
     trpc.wishlistItems.getWishlist.queryOptions(undefined, {
       staleTime: 1000 * 60 * 5,
@@ -33,11 +31,11 @@ const WishlistButton = ({ id, image }: WishlistButtonProps) => {
     if (isWishlisted) {
       addToWishlist.mutate({ productId: id });
       showCustomToast("Item removed from wishlist", image, () =>
-        router.push("/cart"),
+        router.push("/wishlist"),
       );
     } else {
       removeFromWishlist.mutate({ productId: id });
-      showCustomToast("Item wishlited", image, () => router.push("/cart"));
+      showCustomToast("Item wishlited", image, () => router.push("/wishlist"));
     }
   };
 

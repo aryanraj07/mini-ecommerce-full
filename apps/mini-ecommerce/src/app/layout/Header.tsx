@@ -23,11 +23,14 @@ const Header = () => {
   const pathname = usePathname();
   const isAuthenticated = useAppSelector((state) => state.user.user !== null);
   const trpc = useTRPC();
-  const { data: wishlistData = [], isLoading } = useQuery(
-    trpc.wishlistItems.getWishlist.queryOptions(undefined, {
-      staleTime: 1000 * 60 * 5,
-    }),
-  );
+  const wishlistQueryKey = trpc.wishlistItems.getWishlist.queryKey();
+  const { data: wishlistData, isLoading } = useQuery({
+    ...trpc.wishlistItems.getWishlist.queryOptions(),
+    queryKey: wishlistQueryKey, // ✅ force same key everywhere
+    staleTime: 0,
+    refetchOnMount: true,
+  });
+
   const wishlistIds: WishlistItem = wishlistData ?? [];
   const dispatch = useAppDispatch();
   useEffect(() => {
