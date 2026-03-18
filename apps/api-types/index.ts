@@ -1,5 +1,2 @@
-export type { AppRouter } from "../mini-ecommerce-backend/dist-types/server";
-export type {
-  RouterOutputs,
-  RouterInputs,
-} from "../mini-ecommerce-backend/dist-types/server/types";
+export type { AppRouter } from "./dist/server";
+export type { RouterOutputs, RouterInputs } from "./dist/server/types";
