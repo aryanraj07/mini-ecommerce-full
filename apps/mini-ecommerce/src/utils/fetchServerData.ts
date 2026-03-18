@@ -4,7 +4,7 @@ export function createPublicTRPCClient() {
   return createTRPCProxyClient<AppRouter>({
     links: [
       httpBatchLink({
-        url: process.env.BACKEND_URL + "/trpc",
+        url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
       }),
     ],
   });
@@ -14,7 +14,8 @@ export function createServerTRPCClient(cookie: string | null) {
   return createTRPCProxyClient<AppRouter>({
     links: [
       httpBatchLink({
-        url: "http://localhost:8000/trpc",
+        // url: "http://localhost:8000/trpc",
+        url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
         fetch(url, options) {
           return fetch(url, {
             ...options,
