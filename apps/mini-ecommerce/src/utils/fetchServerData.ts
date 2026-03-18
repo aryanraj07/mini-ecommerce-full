@@ -9,7 +9,6 @@ export function createPublicTRPCClient() {
     ],
   });
 }
-
 export function createServerTRPCClient(cookie: string | null) {
   return createTRPCProxyClient<AppRouter>({
     links: [
