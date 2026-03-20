@@ -49,3 +49,5 @@ command to move the file name is
  git mv src/app/components/ProductDetails src/app/components/temp
 
 ```
+## Why used tanstack and trpc in frontend 
+>TanStack Query complements this by handling caching, background refetching, pagination, and request deduplication automatically, which would otherwise require a lot of custom state management if I used Axios or fetch directly.

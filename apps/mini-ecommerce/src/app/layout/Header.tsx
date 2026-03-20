@@ -24,32 +24,20 @@ const Header = () => {
   const isAuthenticated = useAppSelector((state) => state.user.user !== null);
   const trpc = useTRPC();
   const wishlistQueryKey = trpc.wishlistItems.getWishlist.queryKey();
-  const { data: wishlistData, isLoading } = useQuery({
+  const { data: wishlistData } = useQuery({
     ...trpc.wishlistItems.getWishlist.queryOptions(),
-    queryKey: wishlistQueryKey, // ✅ force same key everywhere
+    queryKey: wishlistQueryKey,
     staleTime: 0,
     refetchOnMount: true,
   });
 
   const wishlistIds: WishlistItem = wishlistData ?? [];
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    setShowSearch(pathname === "/products");
-  }, [pathname]);
-  useEffect(() => {
-    const searchTimer = setTimeout(() => {
-      dispatch(setSearch(localSearch));
-    }, 400);
-    return () => {
-      clearTimeout(searchTimer);
-    };
-  }, [localSearch]);
-
   const queryClient = useQueryClient();
   const { data } = useQuery(
     trpc.cartItem.getCart.queryOptions(undefined, {
-      staleTime: 1000 * 60 * 5,
-      refetchOnWindowFocus: false,
+      staleTime: 0,
+      // refetchOnWindowFocus: false,
     }),
   );
   const cartCount = ((data as CartOutput | undefined)?.cartItem ?? []).reduce(
@@ -70,6 +58,18 @@ const Header = () => {
       },
     });
   };
+  useEffect(() => {
+    setShowSearch(pathname === "/products");
+  }, [pathname]);
+  useEffect(() => {
+    const searchTimer = setTimeout(() => {
+      dispatch(setSearch(localSearch));
+    }, 400);
+    return () => {
+      clearTimeout(searchTimer);
+    };
+  }, [localSearch]);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="  container-custom header-section">

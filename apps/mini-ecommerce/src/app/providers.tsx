@@ -6,8 +6,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { TRPCProvider } from "@/utils/trpc";
 import type { AppRouter } from "api-types";
+// This code is only for TypeScript
 
-import React, { useState } from "react";
+declare global {
+  interface Window {
+    __TANSTACK_QUERY_CLIENT__: import("@tanstack/query-core").QueryClient;
+  }
+}
+import React, { useEffect, useState } from "react";
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -40,6 +46,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       ],
     }),
   );
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.__TANSTACK_QUERY_CLIENT__ = queryClient;
+    }
+  }, [queryClient]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>

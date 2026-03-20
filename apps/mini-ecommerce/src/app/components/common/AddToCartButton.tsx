@@ -16,9 +16,6 @@ const AddToCartButton = ({
   id: number;
   image: string | null;
 }) => {
-  const trpc = useTRPC();
-
-  const queryClient = useQueryClient();
   const addToCartMutation = useAddToCart();
   const router = useRouter();
   const handleAddToCart = () => {

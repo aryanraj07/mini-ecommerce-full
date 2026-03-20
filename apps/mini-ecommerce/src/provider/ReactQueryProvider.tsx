@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { TRPCProvider } from "@/utils/trpc";
-import { AppRouter } from "api-types";
+import type { AppRouter } from "api-types";
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
