@@ -50,6 +50,7 @@ const HeroSection = () => {
           sizes="100vw"
           fill
           className="object-cover object-top"
+          loading="eager"
         />
         <div className="absolute inset-0 ">
           <div

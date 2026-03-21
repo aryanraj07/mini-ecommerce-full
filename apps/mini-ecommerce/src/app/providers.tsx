@@ -1,6 +1,7 @@
 "use client";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
@@ -72,6 +73,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           />
         </Provider>
       </TRPCProvider>
+      <ReactQueryDevtools initialIsOpen position="left" />
     </QueryClientProvider>
   );
 }

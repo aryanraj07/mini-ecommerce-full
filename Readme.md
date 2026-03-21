@@ -10,3 +10,7 @@
 ### Delete .git inside frontend
 
 > rm -rf apps/mini-ecommerce/.git
+> build for pushing the frontend pnpm install
+
+pnpm install
+pnpm --filter mini-ecommerce build

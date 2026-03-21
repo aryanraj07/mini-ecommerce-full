@@ -1,14 +1,18 @@
 "use client";
 import ProductCard from "../common/ProductCard";
 import { useTRPC } from "@/utils/trpc";
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import { ProductPreview, ProductsOutput, WishlistItem } from "@/types/types";
 
 const Wishlist = () => {
   const trpc = useTRPC();
-  const { data: wishlistData = [], isLoading } = useQuery(
-    trpc.wishlistItems.getWishlist.queryOptions(),
-  );
+  const wishlistQueryKey = trpc.wishlistItems.getWishlist.queryKey();
+
+  const { data: wishlistData = [], isLoading } = useQuery({
+    ...trpc.wishlistItems.getWishlist.queryOptions(),
+    queryKey: wishlistQueryKey,
+    refetchOnMount: true,
+  });
   const wishlistIds = wishlistData as WishlistItem;
   const { data: productsData } = useQuery(
     trpc.products.getAllProducts.queryOptions(

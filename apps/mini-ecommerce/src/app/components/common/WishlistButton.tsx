@@ -22,6 +22,8 @@ const WishlistButton = ({ id, image }: WishlistButtonProps) => {
   );
   const wishlist = (data as WishlistItem | undefined) ?? [];
   const isWishlisted = new Set(wishlist).has(id);
+  console.log(isWishlisted);
+
   const { addToWishlist, removeFromWishlist } = useWishlist();
 
   const handleWishlist = (e: React.MouseEvent) => {
@@ -29,13 +31,15 @@ const WishlistButton = ({ id, image }: WishlistButtonProps) => {
     e.stopPropagation();
 
     if (isWishlisted) {
-      addToWishlist.mutate({ productId: id });
-      showCustomToast("Item removed from wishlist", image, () =>
+      removeFromWishlist.mutate({ productId: id });
+      showCustomToast("Item removed from wishlit", image, () =>
         router.push("/wishlist"),
       );
     } else {
-      removeFromWishlist.mutate({ productId: id });
-      showCustomToast("Item wishlited", image, () => router.push("/wishlist"));
+      addToWishlist.mutate({ productId: id });
+      showCustomToast("Item  wishlisted", image, () =>
+        router.push("/wishlist"),
+      );
     }
   };
 
