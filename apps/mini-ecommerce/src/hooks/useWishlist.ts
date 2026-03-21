@@ -73,7 +73,9 @@ export const useWishlist = () => {
         (old: WishlistItem | undefined) => {
           if (!old) return old;
 
-          return old.filter((item) => item !== variables.productId);
+          return old.filter(
+            (item: WishlistItem) => item !== variables.productId,
+          );
         },
       );
 
