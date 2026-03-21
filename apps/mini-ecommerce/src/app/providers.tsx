@@ -6,15 +6,15 @@ import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { TRPCProvider } from "@/utils/trpc";
+import React, { useEffect, useState } from "react";
 import type { AppRouter } from "api-types";
 // This code is only for TypeScript
 
-declare global {
-  interface Window {
-    __TANSTACK_QUERY_CLIENT__: import("@tanstack/query-core").QueryClient;
-  }
-}
-import React, { useEffect, useState } from "react";
+// declare global {
+//   interface Window {
+//     __TANSTACK_QUERY_CLIENT__: import("@tanstack/query-core").QueryClient;
+//   }
+// }
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -37,7 +37,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         httpBatchLink({
           url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
           // url: "http://localhost:8000/trpc",
-          fetch(url, options) {
+          fetch(url: string, options: RequestInit) {
             return fetch(url, {
               ...options,
               credentials: "include",
@@ -47,11 +47,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       ],
     }),
   );
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.__TANSTACK_QUERY_CLIENT__ = queryClient;
-    }
-  }, [queryClient]);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     window.__TANSTACK_QUERY_CLIENT__ = queryClient;
+  //   }
+  // }, [queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -73,7 +73,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           />
         </Provider>
       </TRPCProvider>
-      <ReactQueryDevtools initialIsOpen position="left" />
+      {/* <ReactQueryDevtools initialIsOpen position="left" /> */}
     </QueryClientProvider>
   );
 }

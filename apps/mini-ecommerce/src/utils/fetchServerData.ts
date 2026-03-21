@@ -15,7 +15,7 @@ export function createServerTRPCClient(cookie: string | null) {
       httpBatchLink({
         // url: "http://localhost:8000/trpc",
         url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
-        fetch(url, options) {
+        fetch(url: string, options: RequestInit) {
           return fetch(url, {
             ...options,
             headers: {
