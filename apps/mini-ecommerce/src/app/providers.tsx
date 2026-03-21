@@ -15,6 +15,7 @@ import type { AppRouter } from "api-types";
 //     __TANSTACK_QUERY_CLIENT__: import("@tanstack/query-core").QueryClient;
 //   }
 // }
+//
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
