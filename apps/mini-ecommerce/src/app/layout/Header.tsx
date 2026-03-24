@@ -11,22 +11,24 @@ import { CiHeart } from "react-icons/ci";
 
 import { usePathname, useRouter } from "next/navigation";
 
-import { setUser } from "@/features/user/userSlice";
 import { setSearch } from "@/features/filters/filterSlice";
 import { useTRPC } from "@/utils/trpc";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CartItem, CartOutput, WishlistItem } from "@/types/types";
+import { useAuth } from "@/hooks/useAuth";
 const Header = () => {
   const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
   const [showSearch, setShowSearch] = useState(false);
   const [localSearch, setLocalSearch] = useState("");
   const pathname = usePathname();
-  const isAuthenticated = useAppSelector((state) => state.user.user !== null);
+
   const trpc = useTRPC();
   const wishlistQueryKey = trpc.wishlistItems.getWishlist.queryKey();
   const { data: wishlistData } = useQuery({
     ...trpc.wishlistItems.getWishlist.queryOptions(),
     queryKey: wishlistQueryKey,
+    enabled: !isLoading,
     staleTime: 0,
     refetchOnMount: true,
   });
@@ -37,6 +39,7 @@ const Header = () => {
   const { data } = useQuery(
     trpc.cartItem.getCart.queryOptions(undefined, {
       staleTime: 0,
+      enabled: !isLoading,
       // refetchOnWindowFocus: false,
     }),
   );
@@ -49,7 +52,6 @@ const Header = () => {
   const handleLogout = () => {
     logoutMutation.mutate(undefined, {
       onSuccess: async () => {
-        dispatch(setUser(null));
         // 2️⃣ Clear cached user query
         await queryClient.removeQueries({
           queryKey: trpc.users.me.queryKey(),

@@ -19,9 +19,6 @@ const AddToCartButton = ({
   const addToCartMutation = useAddToCart();
   const router = useRouter();
   const handleAddToCart = () => {
-    // if is authenitcated call the api
-    //  else dispatch the addTocart
-
     addToCartMutation.mutate(
       {
         productId: id,
