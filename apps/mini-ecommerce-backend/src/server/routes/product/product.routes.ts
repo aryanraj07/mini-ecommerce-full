@@ -3,8 +3,6 @@ import { router, publicProcedure } from "../../trpc.js";
 import {
   getAllProductOutput,
   getSingleProductOutput,
-  productModel,
-  productPreviewModal,
   similarProductsOutput,
 } from "./models.js";
 import { TRPCError } from "@trpc/server";
