@@ -2,7 +2,7 @@
 import { createTRPCContext } from "@trpc/tanstack-react-query";
 // import type { AppRouter } from "api-types";
 // import type { AppRouter } from "@backend/server";
-import { AppRouter } from "@backend/server/index";
+import type { AppRouter } from "@backend/server/appRouter.types";
 export const { TRPCProvider, useTRPC, useTRPCClient } =
   createTRPCContext<AppRouter>();
 // import type { AppRouter } from "../../../../Ecommerce/app/mini-ecommerce-backend/src/server/index";

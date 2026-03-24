@@ -15,7 +15,6 @@
     "@trpc/client": "^11.10.0",
     "@trpc/react-query": "^11.10.0",
     "@trpc/tanstack-react-query": "^11.10.0",
-    "api-types": "workspace:*",
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "lucide-react": "^0.564.0",

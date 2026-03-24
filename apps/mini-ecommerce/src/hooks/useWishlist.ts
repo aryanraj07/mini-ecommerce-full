@@ -26,17 +26,14 @@ export const useWishlist = () => {
       const previousWishlist =
         queryClient.getQueryData<WishlistItem>(wishlistQueryKey);
 
-      queryClient.setQueryData(
-        wishlistQueryKey,
-        (old: WishlistItem | undefined) => {
-          const current = old ?? [];
+      queryClient.setQueryData(wishlistQueryKey, (old) => {
+        const current = old ?? [];
 
-          // avoid duplicates
-          if (current.includes(variables.productId)) return current;
+        // avoid duplicates
+        if (current.includes(variables.productId)) return current;
 
-          return [...current, variables.productId];
-        },
-      );
+        return [...current, variables.productId];
+      });
 
       return { previousWishlist };
     },
@@ -73,9 +70,7 @@ export const useWishlist = () => {
         (old: WishlistItem | undefined) => {
           if (!old) return old;
 
-          return old.filter(
-            (item: WishlistItem) => item !== variables.productId,
-          );
+          return old.filter((item) => item !== variables.productId);
         },
       );
 

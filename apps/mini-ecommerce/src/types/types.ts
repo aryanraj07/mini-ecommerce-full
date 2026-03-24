@@ -1,4 +1,7 @@
-import type { RouterOutputs, RouterInputs } from "api-types";
+import type {
+  RouterOutputs,
+  RouterInputs,
+} from "@backend/server/appRouter.types";
 
 export type User = RouterOutputs["users"]["me"];
 export type ProductsOutput = RouterOutputs["products"]["getAllProducts"];
