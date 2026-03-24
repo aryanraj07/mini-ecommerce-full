@@ -132,12 +132,14 @@ export const userRouter = router({
         ctx.res.cookie("accessToken", accessToken, {
             httpOnly: true,
             secure: isProd,
+            domain: isProd ? ".railway.app" : undefined,
             sameSite: isProd ? "none" : "lax",
-            maxAge: 60 * 1000,
+            maxAge: 24 * 60 * 60 * 1000,
         });
         ctx.res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: isProd,
+            domain: isProd ? ".railway.app" : undefined,
             sameSite: isProd ? "none" : "lax",
             maxAge: 30 * 24 * 60 * 60 * 1000,
         });
@@ -185,7 +187,8 @@ export const userRouter = router({
                 httpOnly: true,
                 secure: isProd,
                 sameSite: isProd ? "none" : "lax",
-                maxAge: 1 * 60 * 1000,
+                domain: isProd ? ".railway.app" : undefined,
+                maxAge: 24 * 60 * 60 * 1000,
             });
         }
         catch (err) {

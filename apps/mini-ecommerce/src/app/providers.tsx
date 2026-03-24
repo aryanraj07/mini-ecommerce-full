@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { TRPCProvider } from "@/utils/trpc";
 import React, { useEffect, useState } from "react";
-import type { AppRouter } from "api-types";
+import type { AppRouter } from "@backend/server/index";
 // This code is only for TypeScript
 
 // declare global {
@@ -38,7 +38,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         httpBatchLink({
           url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
           // url: "http://localhost:8000/trpc",
-          fetch(url: string, options: RequestInit) {
+          fetch(url, options) {
             return fetch(url, {
               ...options,
               credentials: "include",

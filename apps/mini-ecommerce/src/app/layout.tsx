@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./layout/Header";
 import { Suspense } from "react";
-import AuthLoader from "./components/AuthLoader";
 import FiltersHydrator from "./components/FiltersHydrator";
 import Providers from "./providers";
 import AUthProvider from "./components/common/AUthProvider";

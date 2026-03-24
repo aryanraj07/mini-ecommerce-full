@@ -1,5 +1,5 @@
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
-import type { AppRouter } from "api-types";
+import type { AppRouter } from "@backend/server/index";
 export function createPublicTRPCClient() {
   return createTRPCProxyClient<AppRouter>({
     links: [
@@ -15,7 +15,7 @@ export function createServerTRPCClient(cookie: string | null) {
       httpBatchLink({
         // url: "http://localhost:8000/trpc",
         url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
-        fetch(url: string, options: RequestInit) {
+        fetch(url, options) {
           return fetch(url, {
             ...options,
             headers: {
