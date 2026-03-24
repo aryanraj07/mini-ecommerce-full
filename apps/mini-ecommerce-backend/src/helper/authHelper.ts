@@ -1,13 +1,8 @@
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
-});
 
 export async function getUserFromToken(
   token: string | undefined,
-  prisma: PrismaClient,
+  prisma: { user: { findUnique: Function } },
 ) {
   if (!token) return null;
 

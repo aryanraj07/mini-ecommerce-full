@@ -1,8 +1,4 @@
-import { PrismaPg } from "@prisma/adapter-pg";
 import jwt from "jsonwebtoken";
-const adapter = new PrismaPg({
-    connectionString: process.env.DATABASE_URL,
-});
 export async function getUserFromToken(token, prisma) {
     if (!token)
         return null;
