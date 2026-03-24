@@ -1,5 +1,5 @@
+import type { AppRouter } from "./server/index.js";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
-import type { appRouter } from "./appRouter.js";
-export type AppRouter = typeof appRouter;
+export type { AppRouter };
 export type RouterInputs = inferRouterInputs<AppRouter>;
 export type RouterOutputs = inferRouterOutputs<AppRouter>;

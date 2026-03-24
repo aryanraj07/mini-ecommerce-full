@@ -2,15 +2,15 @@ import z from "zod";
 export declare const categoryModel: z.ZodObject<{
     id: z.ZodNumber;
     name: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const brandModel: z.ZodObject<{
     id: z.ZodNumber;
     name: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const tagModel: z.ZodObject<{
     id: z.ZodNumber;
     name: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const reviewModel: z.ZodObject<{
     id: z.ZodNumber;
     rating: z.ZodNumber;
@@ -18,7 +18,7 @@ export declare const reviewModel: z.ZodObject<{
     createdAt: z.ZodDate;
     reviewerName: z.ZodString;
     reviewerEmail: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const productModel: z.ZodObject<{
     id: z.ZodNumber;
     title: z.ZodString;
@@ -43,15 +43,15 @@ export declare const productModel: z.ZodObject<{
     category: z.ZodNullable<z.ZodObject<{
         id: z.ZodNumber;
         name: z.ZodString;
-    }, z.z.core.$strip>>;
+    }, z.core.$strip>>;
     brand: z.ZodNullable<z.ZodObject<{
         id: z.ZodNumber;
         name: z.ZodString;
-    }, z.z.core.$strip>>;
+    }, z.core.$strip>>;
     tags: z.ZodNullable<z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         name: z.ZodString;
-    }, z.z.core.$strip>>>;
+    }, z.core.$strip>>>;
     reviews: z.ZodNullable<z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         rating: z.ZodNumber;
@@ -59,10 +59,10 @@ export declare const productModel: z.ZodObject<{
         createdAt: z.ZodDate;
         reviewerName: z.ZodString;
         reviewerEmail: z.ZodString;
-    }, z.z.core.$strip>>>;
+    }, z.core.$strip>>>;
     createdAt: z.ZodDate;
     updatedAt: z.ZodDate;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const productPreviewModal: z.ZodObject<{
     id: z.ZodNumber;
     title: z.ZodString;
@@ -76,16 +76,16 @@ export declare const productPreviewModal: z.ZodObject<{
     tags: z.ZodOptional<z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         name: z.ZodString;
-    }, z.z.core.$strip>>>;
+    }, z.core.$strip>>>;
     category: z.ZodOptional<z.ZodObject<{
         id: z.ZodNumber;
         name: z.ZodString;
-    }, z.z.core.$strip>>;
+    }, z.core.$strip>>;
     brand: z.ZodNullable<z.ZodOptional<z.ZodObject<{
         id: z.ZodNumber;
         name: z.ZodString;
-    }, z.z.core.$strip>>>;
-}, z.z.core.$strip>;
+    }, z.core.$strip>>>;
+}, z.core.$strip>;
 export type ProductPreview = z.infer<typeof productPreviewModal>;
 export type Product = z.infer<typeof productModel>;
 export declare const getAllProductOutput: z.ZodObject<{
@@ -102,22 +102,22 @@ export declare const getAllProductOutput: z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>>;
+        }, z.core.$strip>>>;
         category: z.ZodOptional<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>;
+        }, z.core.$strip>>;
         brand: z.ZodNullable<z.ZodOptional<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>>;
-    }, z.z.core.$strip>>;
+        }, z.core.$strip>>>;
+    }, z.core.$strip>>;
     meta: z.ZodObject<{
         current_page: z.ZodNumber;
         last_page: z.ZodNumber;
         total: z.ZodNumber;
-    }, z.z.core.$strip>;
-}, z.z.core.$strip>;
+    }, z.core.$strip>;
+}, z.core.$strip>;
 export declare const getSingleProductOutput: z.ZodObject<{
     product: z.ZodObject<{
         id: z.ZodNumber;
@@ -143,15 +143,15 @@ export declare const getSingleProductOutput: z.ZodObject<{
         category: z.ZodNullable<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>;
+        }, z.core.$strip>>;
         brand: z.ZodNullable<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>;
+        }, z.core.$strip>>;
         tags: z.ZodNullable<z.ZodArray<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>>;
+        }, z.core.$strip>>>;
         reviews: z.ZodNullable<z.ZodArray<z.ZodObject<{
             id: z.ZodNumber;
             rating: z.ZodNumber;
@@ -159,11 +159,11 @@ export declare const getSingleProductOutput: z.ZodObject<{
             createdAt: z.ZodDate;
             reviewerName: z.ZodString;
             reviewerEmail: z.ZodString;
-        }, z.z.core.$strip>>>;
+        }, z.core.$strip>>>;
         createdAt: z.ZodDate;
         updatedAt: z.ZodDate;
-    }, z.z.core.$strip>;
-}, z.z.core.$strip>;
+    }, z.core.$strip>;
+}, z.core.$strip>;
 export declare const similarProductsOutput: z.ZodObject<{
     products: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
@@ -178,14 +178,14 @@ export declare const similarProductsOutput: z.ZodObject<{
         tags: z.ZodOptional<z.ZodArray<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>>;
+        }, z.core.$strip>>>;
         category: z.ZodOptional<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>;
+        }, z.core.$strip>>;
         brand: z.ZodNullable<z.ZodOptional<z.ZodObject<{
             id: z.ZodNumber;
             name: z.ZodString;
-        }, z.z.core.$strip>>>;
-    }, z.z.core.$strip>>;
-}, z.z.core.$strip>;
+        }, z.core.$strip>>>;
+    }, z.core.$strip>>;
+}, z.core.$strip>;

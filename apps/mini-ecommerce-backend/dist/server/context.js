@@ -12,7 +12,7 @@ const prisma = new PrismaClient({
 export const createContext = async ({ req, res, }) => {
     let user = null;
     const token = req.cookies?.accessToken;
-    user = await getUserFromToken(token, prisma);
+    user = await getUserFromToken(token);
     let guestId = req.cookies?.guestId;
     if (!user && !guestId) {
         guestId = randomUUID();

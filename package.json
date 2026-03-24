@@ -1,9 +1,8 @@
 {
   "private": true,
-  "scripts": {
-    "build:types": "cd apps/mini-ecommerce-backend && npm run build:types && cp -r dist-types ../api-types/dist"
-  },
+  "name": "ecommerce-monorepo",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ]
 }

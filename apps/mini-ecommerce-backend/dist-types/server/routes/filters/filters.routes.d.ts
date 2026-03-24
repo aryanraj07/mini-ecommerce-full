@@ -1,20 +1,6 @@
 export declare const filterRouter: import("@trpc/server").TRPCBuiltRouter<{
     ctx: {
-        prisma: import("@prisma/client").PrismaClient<{
-            adapter: import("@prisma/adapter-pg").PrismaPg;
-        }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-        user: {
-            id: number;
-            phoneNumber: string;
-            name: string | null;
-            email: string | null;
-            isVerified: boolean;
-            role: import("@prisma/client").$Enums.UserRole;
-            createdAt: Date;
-        } | null;
-        req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-        res: import("express").Response<any, Record<string, any>>;
-        guestId: any;
+        user: import("../../context.js").Context["user"];
     };
     meta: import("trpc-to-openapi").OpenApiMeta;
     errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -24,16 +10,16 @@ export declare const filterRouter: import("@trpc/server").TRPCBuiltRouter<{
         input: void;
         output: {
             categories: {
-                value: string | null;
                 count: number;
+                value?: string;
             }[];
             brands: {
-                value: string | null;
                 count: number;
+                value?: string;
             }[];
             tags: {
-                value: string | null;
                 count: number;
+                value?: string;
             }[];
             priceRange: {
                 min: number;

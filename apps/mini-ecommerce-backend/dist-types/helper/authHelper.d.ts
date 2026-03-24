@@ -6,4 +6,4 @@ export declare function getUserFromToken(token?: string): Promise<{
     isVerified: boolean;
     role: import("@prisma/client").$Enums.UserRole;
     createdAt: Date;
-} | null>;
+}>;

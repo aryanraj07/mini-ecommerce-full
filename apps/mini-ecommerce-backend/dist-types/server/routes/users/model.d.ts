@@ -14,7 +14,7 @@ export declare const userModel: z.ZodObject<{
         ADMIN: "ADMIN";
     }>>;
     createdAt: z.ZodDate;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const otpModel: z.ZodObject<{
     id: z.ZodNumber;
     phoneNumber: z.ZodString;
@@ -22,17 +22,17 @@ export declare const otpModel: z.ZodObject<{
     expiresAt: z.ZodDate;
     attempts: z.ZodDefault<z.ZodNumber>;
     createdAt: z.ZodDate;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const sendOtpSchema: z.ZodObject<{
     phoneNumber: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const verifyOtpSchema: z.ZodObject<{
     phoneNumber: z.ZodString;
     otp: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const simpleMessageResponse: z.ZodObject<{
     message: z.ZodString;
-}, z.z.core.$strip>;
+}, z.core.$strip>;
 export declare const getUser: z.ZodObject<{
     user: z.ZodObject<{
         id: z.ZodNumber;
@@ -45,5 +45,5 @@ export declare const getUser: z.ZodObject<{
             ADMIN: "ADMIN";
         }>>;
         createdAt: z.ZodDate;
-    }, z.z.core.$strip>;
-}, z.z.core.$strip>;
+    }, z.core.$strip>;
+}, z.core.$strip>;

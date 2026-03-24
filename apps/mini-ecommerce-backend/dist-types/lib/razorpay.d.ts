@@ -1,2 +1,1 @@
-import Razorpay from "razorpay";
-export declare const razorpay: Razorpay;
+export declare const razorpay: any;

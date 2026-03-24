@@ -1,4 +1,5 @@
 {
+  "name": "mini-ecommerce-backend",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -6,6 +7,7 @@
     "dev": "tsc-watch --onSuccess \"node dist/index\"",
     "seed": "node prisma/seed.js",
     "build": "prisma generate && tsc",
+    "types": "dist-types/types.d.ts",
     "build:types": "tsc -p tsconfig.types.json"
   },
   "prisma": {},

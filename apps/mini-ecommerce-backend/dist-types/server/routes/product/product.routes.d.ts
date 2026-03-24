@@ -1,20 +1,6 @@
 export declare const productRouter: import("@trpc/server").TRPCBuiltRouter<{
     ctx: {
-        prisma: import("@prisma/client").PrismaClient<{
-            adapter: import("@prisma/adapter-pg").PrismaPg;
-        }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-        user: {
-            id: number;
-            phoneNumber: string;
-            name: string | null;
-            email: string | null;
-            isVerified: boolean;
-            role: import("@prisma/client").$Enums.UserRole;
-            createdAt: Date;
-        } | null;
-        req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-        res: import("express").Response<any, Record<string, any>>;
-        guestId: any;
+        user: import("../../context.js").Context["user"];
     };
     meta: import("trpc-to-openapi").OpenApiMeta;
     errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -24,15 +10,15 @@ export declare const productRouter: import("@trpc/server").TRPCBuiltRouter<{
         input: {
             page?: unknown;
             limit?: unknown;
-            category?: string[] | undefined;
-            brand?: string[] | undefined;
-            tag?: string[] | undefined;
+            category?: string[];
+            brand?: string[];
+            tag?: string[];
             min?: unknown;
             max?: unknown;
             rating?: unknown;
-            search?: string | undefined;
-            sort?: string | undefined;
-            ids?: number[] | undefined;
+            search?: string;
+            sort?: string;
+            ids?: number[];
         };
         output: {
             products: {
@@ -44,19 +30,19 @@ export declare const productRouter: import("@trpc/server").TRPCBuiltRouter<{
                 stock: number;
                 rating: number;
                 brandName: string;
-                discountedPrice?: number | undefined;
+                discountedPrice?: number;
                 tags?: {
                     id: number;
                     name: string;
-                }[] | undefined;
+                }[];
                 category?: {
                     id: number;
                     name: string;
-                } | undefined;
+                };
                 brand?: {
                     id: number;
                     name: string;
-                } | null | undefined;
+                };
             }[];
             meta: {
                 current_page: number;
@@ -76,44 +62,44 @@ export declare const productRouter: import("@trpc/server").TRPCBuiltRouter<{
                 title: string;
                 description: string;
                 price: number;
-                discountPercentage: number | null;
-                rating: number | null;
                 stock: number;
-                sku: string | null;
-                weight: number | null;
-                dimensions: unknown;
-                warrantyInformation: string | null;
-                shippingInformation: string | null;
-                availabilityStatus: string | null;
-                returnPolicy: string | null;
-                minimumOrderQuantity: number | null;
-                meta: unknown;
-                images: string[] | null;
-                thumbnail: string | null;
                 categoryId: number;
-                brandId: number | null;
-                category: {
+                createdAt: Date;
+                updatedAt: Date;
+                discountPercentage?: number;
+                rating?: number;
+                sku?: string;
+                weight?: number;
+                dimensions?: unknown;
+                warrantyInformation?: string;
+                shippingInformation?: string;
+                availabilityStatus?: string;
+                returnPolicy?: string;
+                minimumOrderQuantity?: number;
+                meta?: unknown;
+                images?: string[];
+                thumbnail?: string;
+                brandId?: number;
+                category?: {
                     id: number;
                     name: string;
-                } | null;
-                brand: {
+                };
+                brand?: {
                     id: number;
                     name: string;
-                } | null;
-                tags: {
+                };
+                tags?: {
                     id: number;
                     name: string;
-                }[] | null;
-                reviews: {
+                }[];
+                reviews?: {
                     id: number;
                     rating: number;
                     comment: string;
                     createdAt: Date;
                     reviewerName: string;
                     reviewerEmail: string;
-                }[] | null;
-                createdAt: Date;
-                updatedAt: Date;
+                }[];
             };
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
@@ -132,19 +118,19 @@ export declare const productRouter: import("@trpc/server").TRPCBuiltRouter<{
                 stock: number;
                 rating: number;
                 brandName: string;
-                discountedPrice?: number | undefined;
+                discountedPrice?: number;
                 tags?: {
                     id: number;
                     name: string;
-                }[] | undefined;
+                }[];
                 category?: {
                     id: number;
                     name: string;
-                } | undefined;
+                };
                 brand?: {
                     id: number;
                     name: string;
-                } | null | undefined;
+                };
             }[];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;

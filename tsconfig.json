@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@backend/*": ["apps/mini-ecommerce-backend/src/*"]
+      "@repo/api-types": ["packages/api-types"]
     },
     "strict": true,
     "esModuleInterop": true,

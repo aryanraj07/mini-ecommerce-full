@@ -1,20 +1,6 @@
 export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
     ctx: {
-        prisma: import("@prisma/client").PrismaClient<{
-            adapter: import("@prisma/adapter-pg").PrismaPg;
-        }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-        user: {
-            id: number;
-            phoneNumber: string;
-            name: string | null;
-            email: string | null;
-            isVerified: boolean;
-            role: import("@prisma/client").$Enums.UserRole;
-            createdAt: Date;
-        } | null;
-        req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-        res: import("express").Response<any, Record<string, any>>;
-        guestId: any;
+        user: import("./context.js").Context["user"];
     };
     meta: import("trpc-to-openapi").OpenApiMeta;
     errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -22,21 +8,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
 }, import("@trpc/server").TRPCDecorateCreateRouterOptions<{
     products: import("@trpc/server").TRPCBuiltRouter<{
         ctx: {
-            prisma: import("@prisma/client").PrismaClient<{
-                adapter: import("@prisma/adapter-pg").PrismaPg;
-            }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-            user: {
-                id: number;
-                phoneNumber: string;
-                name: string | null;
-                email: string | null;
-                isVerified: boolean;
-                role: import("@prisma/client").$Enums.UserRole;
-                createdAt: Date;
-            } | null;
-            req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-            res: import("express").Response<any, Record<string, any>>;
-            guestId: any;
+            user: import("./context.js").Context["user"];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
         errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -46,15 +18,15 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
             input: {
                 page?: unknown;
                 limit?: unknown;
-                category?: string[] | undefined;
-                brand?: string[] | undefined;
-                tag?: string[] | undefined;
+                category?: string[];
+                brand?: string[];
+                tag?: string[];
                 min?: unknown;
                 max?: unknown;
                 rating?: unknown;
-                search?: string | undefined;
-                sort?: string | undefined;
-                ids?: number[] | undefined;
+                search?: string;
+                sort?: string;
+                ids?: number[];
             };
             output: {
                 products: {
@@ -66,19 +38,19 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                     stock: number;
                     rating: number;
                     brandName: string;
-                    discountedPrice?: number | undefined;
+                    discountedPrice?: number;
                     tags?: {
                         id: number;
                         name: string;
-                    }[] | undefined;
+                    }[];
                     category?: {
                         id: number;
                         name: string;
-                    } | undefined;
+                    };
                     brand?: {
                         id: number;
                         name: string;
-                    } | null | undefined;
+                    };
                 }[];
                 meta: {
                     current_page: number;
@@ -98,44 +70,44 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                     title: string;
                     description: string;
                     price: number;
-                    discountPercentage: number | null;
-                    rating: number | null;
                     stock: number;
-                    sku: string | null;
-                    weight: number | null;
-                    dimensions: unknown;
-                    warrantyInformation: string | null;
-                    shippingInformation: string | null;
-                    availabilityStatus: string | null;
-                    returnPolicy: string | null;
-                    minimumOrderQuantity: number | null;
-                    meta: unknown;
-                    images: string[] | null;
-                    thumbnail: string | null;
                     categoryId: number;
-                    brandId: number | null;
-                    category: {
+                    createdAt: Date;
+                    updatedAt: Date;
+                    discountPercentage?: number;
+                    rating?: number;
+                    sku?: string;
+                    weight?: number;
+                    dimensions?: unknown;
+                    warrantyInformation?: string;
+                    shippingInformation?: string;
+                    availabilityStatus?: string;
+                    returnPolicy?: string;
+                    minimumOrderQuantity?: number;
+                    meta?: unknown;
+                    images?: string[];
+                    thumbnail?: string;
+                    brandId?: number;
+                    category?: {
                         id: number;
                         name: string;
-                    } | null;
-                    brand: {
+                    };
+                    brand?: {
                         id: number;
                         name: string;
-                    } | null;
-                    tags: {
+                    };
+                    tags?: {
                         id: number;
                         name: string;
-                    }[] | null;
-                    reviews: {
+                    }[];
+                    reviews?: {
                         id: number;
                         rating: number;
                         comment: string;
                         createdAt: Date;
                         reviewerName: string;
                         reviewerEmail: string;
-                    }[] | null;
-                    createdAt: Date;
-                    updatedAt: Date;
+                    }[];
                 };
             };
             meta: import("trpc-to-openapi").OpenApiMeta;
@@ -154,19 +126,19 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                     stock: number;
                     rating: number;
                     brandName: string;
-                    discountedPrice?: number | undefined;
+                    discountedPrice?: number;
                     tags?: {
                         id: number;
                         name: string;
-                    }[] | undefined;
+                    }[];
                     category?: {
                         id: number;
                         name: string;
-                    } | undefined;
+                    };
                     brand?: {
                         id: number;
                         name: string;
-                    } | null | undefined;
+                    };
                 }[];
             };
             meta: import("trpc-to-openapi").OpenApiMeta;
@@ -174,21 +146,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
     }>>;
     filters: import("@trpc/server").TRPCBuiltRouter<{
         ctx: {
-            prisma: import("@prisma/client").PrismaClient<{
-                adapter: import("@prisma/adapter-pg").PrismaPg;
-            }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-            user: {
-                id: number;
-                phoneNumber: string;
-                name: string | null;
-                email: string | null;
-                isVerified: boolean;
-                role: import("@prisma/client").$Enums.UserRole;
-                createdAt: Date;
-            } | null;
-            req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-            res: import("express").Response<any, Record<string, any>>;
-            guestId: any;
+            user: import("./context.js").Context["user"];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
         errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -198,16 +156,16 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
             input: void;
             output: {
                 categories: {
-                    value: string | null;
                     count: number;
+                    value?: string;
                 }[];
                 brands: {
-                    value: string | null;
                     count: number;
+                    value?: string;
                 }[];
                 tags: {
-                    value: string | null;
                     count: number;
+                    value?: string;
                 }[];
                 priceRange: {
                     min: number;
@@ -226,21 +184,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
     }>>;
     users: import("@trpc/server").TRPCBuiltRouter<{
         ctx: {
-            prisma: import("@prisma/client").PrismaClient<{
-                adapter: import("@prisma/adapter-pg").PrismaPg;
-            }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-            user: {
-                id: number;
-                phoneNumber: string;
-                name: string | null;
-                email: string | null;
-                isVerified: boolean;
-                role: import("@prisma/client").$Enums.UserRole;
-                createdAt: Date;
-            } | null;
-            req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-            res: import("express").Response<any, Record<string, any>>;
-            guestId: any;
+            user: import("./context.js").Context["user"];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
         errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -270,12 +214,12 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
             output: {
                 user: {
                     id: number;
-                    name: string | null;
-                    email: string | null;
                     phoneNumber: string;
                     isVerified: boolean;
                     role: "USER" | "ADMIN";
                     createdAt: Date;
+                    name?: string;
+                    email?: string;
                 };
             };
             meta: import("trpc-to-openapi").OpenApiMeta;
@@ -295,21 +239,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
     }>>;
     wishlistItems: import("@trpc/server").TRPCBuiltRouter<{
         ctx: {
-            prisma: import("@prisma/client").PrismaClient<{
-                adapter: import("@prisma/adapter-pg").PrismaPg;
-            }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-            user: {
-                id: number;
-                phoneNumber: string;
-                name: string | null;
-                email: string | null;
-                isVerified: boolean;
-                role: import("@prisma/client").$Enums.UserRole;
-                createdAt: Date;
-            } | null;
-            req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-            res: import("express").Response<any, Record<string, any>>;
-            guestId: any;
+            user: import("./context.js").Context["user"];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
         errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -348,21 +278,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
     }>>;
     cartItem: import("@trpc/server").TRPCBuiltRouter<{
         ctx: {
-            prisma: import("@prisma/client").PrismaClient<{
-                adapter: import("@prisma/adapter-pg").PrismaPg;
-            }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-            user: {
-                id: number;
-                phoneNumber: string;
-                name: string | null;
-                email: string | null;
-                isVerified: boolean;
-                role: import("@prisma/client").$Enums.UserRole;
-                createdAt: Date;
-            } | null;
-            req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-            res: import("express").Response<any, Record<string, any>>;
-            guestId: any;
+            user: import("./context.js").Context["user"];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
         errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -371,7 +287,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
         addToCart: import("@trpc/server").TRPCMutationProcedure<{
             input: {
                 productId: number;
-                quantity?: number | undefined;
+                quantity?: number;
             };
             output: {
                 message: string;
@@ -392,7 +308,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                     stock: number;
                     rating: number;
                     brandName: string;
-                    discountedPrice?: number | undefined;
+                    discountedPrice?: number;
                 }[];
             };
             meta: import("trpc-to-openapi").OpenApiMeta;
@@ -420,7 +336,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
         updateQuantity: import("@trpc/server").TRPCMutationProcedure<{
             input: {
                 cartItemId: number;
-                quantity?: number | undefined;
+                quantity?: number;
             };
             output: {
                 message: string;
@@ -437,21 +353,7 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
     }>>;
     order: import("@trpc/server").TRPCBuiltRouter<{
         ctx: {
-            prisma: import("@prisma/client").PrismaClient<{
-                adapter: import("@prisma/adapter-pg").PrismaPg;
-            }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-            user: {
-                id: number;
-                phoneNumber: string;
-                name: string | null;
-                email: string | null;
-                isVerified: boolean;
-                role: import("@prisma/client").$Enums.UserRole;
-                createdAt: Date;
-            } | null;
-            req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-            res: import("express").Response<any, Record<string, any>>;
-            guestId: any;
+            user: import("./context.js").Context["user"];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
         errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -477,7 +379,6 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                 userId: number;
                 totalAmount: number;
                 paymentStatus: "PENDING" | "SUCCESS" | "FAILED";
-                paymentId: string | null;
                 orderStatus: "CREATED" | "CONFIRMED" | "SHIPPED" | "DELIVERED" | "CANCELLED";
                 createdAt: Date;
                 items: {
@@ -490,9 +391,10 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                     product: {
                         id: number;
                         title: string;
-                        thumbnail: string | null;
+                        thumbnail?: string;
                     };
                 }[];
+                paymentId?: string;
             }[];
             meta: import("trpc-to-openapi").OpenApiMeta;
         }>;
@@ -505,7 +407,6 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                 userId: number;
                 totalAmount: number;
                 paymentStatus: "PENDING" | "SUCCESS" | "FAILED";
-                paymentId: string | null;
                 orderStatus: "CREATED" | "CONFIRMED" | "SHIPPED" | "DELIVERED" | "CANCELLED";
                 createdAt: Date;
                 items: {
@@ -518,60 +419,16 @@ export declare const appRouter: import("@trpc/server").TRPCBuiltRouter<{
                     product: {
                         id: number;
                         title: string;
-                        thumbnail: string | null;
+                        thumbnail?: string;
                     };
                 }[];
+                paymentId?: string;
             };
             meta: import("trpc-to-openapi").OpenApiMeta;
         }>;
         myOrders: import("@trpc/server").TRPCQueryProcedure<{
             input: void;
-            output: ({
-                items: ({
-                    product: {
-                        id: number;
-                        createdAt: Date;
-                        meta: import("@prisma/client/runtime/client").JsonValue | null;
-                        title: string;
-                        description: string;
-                        categoryId: number;
-                        price: import("@prisma/client-runtime-utils").Decimal;
-                        discountPercentage: number | null;
-                        rating: number | null;
-                        stock: number;
-                        brandId: number | null;
-                        sku: string | null;
-                        weight: number | null;
-                        dimensions: import("@prisma/client/runtime/client").JsonValue | null;
-                        availabilityStatus: string | null;
-                        returnPolicy: string | null;
-                        images: string[];
-                        thumbnail: string | null;
-                        updatedAt: Date;
-                        sellerId: number;
-                        slug: string;
-                        totalReviews: number;
-                        minimumOrderQuantity: number;
-                        shippingInformation: string | null;
-                        warrantyInformation: string | null;
-                    };
-                } & {
-                    id: number;
-                    price: import("@prisma/client-runtime-utils").Decimal;
-                    productId: number;
-                    quantity: number;
-                    orderId: number;
-                    cartItemId: number;
-                })[];
-            } & {
-                id: number;
-                createdAt: Date;
-                userId: number;
-                totalAmount: import("@prisma/client-runtime-utils").Decimal;
-                paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
-                paymentId: string | null;
-                orderStatus: import("@prisma/client").$Enums.OrderStatus;
-            })[];
+            output: any;
             meta: import("trpc-to-openapi").OpenApiMeta;
         }>;
     }>>;

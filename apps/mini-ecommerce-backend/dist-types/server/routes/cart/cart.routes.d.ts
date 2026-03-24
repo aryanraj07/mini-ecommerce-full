@@ -1,20 +1,6 @@
 export declare const cartRouter: import("@trpc/server").TRPCBuiltRouter<{
     ctx: {
-        prisma: import("@prisma/client").PrismaClient<{
-            adapter: import("@prisma/adapter-pg").PrismaPg;
-        }, never, import("@prisma/client/runtime/client").DefaultArgs>;
-        user: {
-            id: number;
-            phoneNumber: string;
-            name: string | null;
-            email: string | null;
-            isVerified: boolean;
-            role: import("@prisma/client").$Enums.UserRole;
-            createdAt: Date;
-        } | null;
-        req: import("express").Request<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
-        res: import("express").Response<any, Record<string, any>>;
-        guestId: any;
+        user: import("../../context.js").Context["user"];
     };
     meta: import("trpc-to-openapi").OpenApiMeta;
     errorShape: import("@trpc/server").TRPCDefaultErrorShape;
@@ -23,7 +9,7 @@ export declare const cartRouter: import("@trpc/server").TRPCBuiltRouter<{
     addToCart: import("@trpc/server").TRPCMutationProcedure<{
         input: {
             productId: number;
-            quantity?: number | undefined;
+            quantity?: number;
         };
         output: {
             message: string;
@@ -44,7 +30,7 @@ export declare const cartRouter: import("@trpc/server").TRPCBuiltRouter<{
                 stock: number;
                 rating: number;
                 brandName: string;
-                discountedPrice?: number | undefined;
+                discountedPrice?: number;
             }[];
         };
         meta: import("trpc-to-openapi").OpenApiMeta;
@@ -72,7 +58,7 @@ export declare const cartRouter: import("@trpc/server").TRPCBuiltRouter<{
     updateQuantity: import("@trpc/server").TRPCMutationProcedure<{
         input: {
             cartItemId: number;
-            quantity?: number | undefined;
+            quantity?: number;
         };
         output: {
             message: string;
