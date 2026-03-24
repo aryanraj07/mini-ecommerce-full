@@ -5,10 +5,10 @@ const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
 });
 
-const prisma = new PrismaClient({
-  adapter,
-});
-export async function getUserFromToken(token?: string) {
+export async function getUserFromToken(
+  token: string | undefined,
+  prisma: PrismaClient,
+) {
   if (!token) return null;
 
   try {

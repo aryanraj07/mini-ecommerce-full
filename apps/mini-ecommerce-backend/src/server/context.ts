@@ -18,7 +18,7 @@ export const createContext = async ({
 }: trpcExpress.CreateExpressContextOptions) => {
   let user = null;
   const token = req.cookies?.accessToken;
-  user = await getUserFromToken(token);
+  user = await getUserFromToken(token, prisma);
 
   let guestId = req.cookies?.guestId;
 
