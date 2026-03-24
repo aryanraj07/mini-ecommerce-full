@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/utils/trpc";
 import { showCustomToast } from "@/utils/showToast";
 import { useRouter } from "next/navigation";
-import { AddToWishlist, RemoveWishlist, WishlistItem } from "@/types/types";
+import { WishlistItem } from "@/types/types";
 import { useWishlist } from "@/hooks/useWishlist";
 interface WishlistButtonProps {
   id: number;
