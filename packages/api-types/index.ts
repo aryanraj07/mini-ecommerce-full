@@ -1,2 +1,6 @@
-// 👇 THIS is the trick
-export type * from "../../apps/mini-ecommerce-backend/src/types";
+export type {
+  AppRouter,
+  RouterInputs,
+  RouterOutputs,
+} from "../../apps/mini-ecommerce-backend/dist/types";
+// } from "../../apps/mini-ecommerce-backend/dist-types/types";

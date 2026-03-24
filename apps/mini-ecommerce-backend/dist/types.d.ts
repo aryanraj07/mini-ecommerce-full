@@ -1,8 +1,6 @@
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
-import type { AppRouter } from "./server/index.js";
+import type { appRouter } from "../dist/server/index.js";
 
-// 🔥 BREAK inference chain
-export type { AppRouter };
-
+export type AppRouter = typeof appRouter;
 export type RouterInputs = inferRouterInputs<AppRouter>;
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
