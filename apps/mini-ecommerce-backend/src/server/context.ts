@@ -5,6 +5,7 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { randomUUID } from "node:crypto";
 import { getUserFromToken } from "../helper/authHelper.js";
+
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
 });

@@ -6,6 +6,7 @@
     "skipLibCheck": true,
 
     "rootDir": "src",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "noEmitOnError": false
   },

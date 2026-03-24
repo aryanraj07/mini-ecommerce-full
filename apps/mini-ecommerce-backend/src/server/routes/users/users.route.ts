@@ -148,7 +148,6 @@ export const userRouter = router({
       ctx.res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: isProd,
-        domain: isProd ? ".railway.app" : undefined,
         sameSite: isProd ? "none" : "lax",
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
