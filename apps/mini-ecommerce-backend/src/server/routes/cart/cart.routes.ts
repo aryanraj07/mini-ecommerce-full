@@ -30,7 +30,7 @@ export const cartRouter = router({
       console.log(productId);
       console.log(quantity);
 
-      console.log("User id ",ctx?.user?.id);
+      console.log("User id ", ctx?.user?.id);
 
       if (ctx.user) {
         console.log("Logging in user");
@@ -111,8 +111,8 @@ export const cartRouter = router({
 
       let total = 0;
       let discount = 0;
-
-      const items = cart.map((item) => {
+      type CartWithProduct = (typeof cart)[number];
+      const items = cart.map((item: CartWithProduct) => {
         const price = Number(item.product.price);
         const discountPercentage = item.product.discountPercentage ?? 0;
 
@@ -173,8 +173,8 @@ export const cartRouter = router({
 
       let total: number = 0;
       let discount = 0;
-
-      cartItems.forEach((item) => {
+      type CartWithProduct = (typeof cartItems)[number];
+      cartItems.forEach((item: CartWithProduct) => {
         const price = Number(item.product.price);
         if (item.product.discountPercentage) {
         }
@@ -299,7 +299,7 @@ export const cartRouter = router({
       });
 
       ctx.res.clearCookie("guestId");
-
+      //
       return { message: "Merged cart successfully" };
     }),
 });
