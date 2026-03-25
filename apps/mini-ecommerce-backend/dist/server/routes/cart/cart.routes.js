@@ -254,6 +254,7 @@ export const cartRouter = router({
             where: { guestId },
         });
         ctx.res.clearCookie("guestId");
+        //
         return { message: "Merged cart successfully" };
     }),
 });
