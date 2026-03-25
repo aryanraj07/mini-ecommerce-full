@@ -15,9 +15,9 @@ const Summary = ({ summary, selectedItems }: SummaryProps) => {
   const trpcClient = useTRPCClient();
   const router = useRouter();
   const checkoutMutation = useMutation<
-    CheckoutOutput, // 👈 your backend output type
+    CheckoutOutput, // backend output type
     unknown,
-    { cartItemsIds: number[] } // 👈 input type
+    { cartItemsIds: number[] } //  input type
   >({
     mutationFn: (variables) => trpcClient.order.checkout.mutate(variables),
   });

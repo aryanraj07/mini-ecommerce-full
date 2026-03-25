@@ -51,3 +51,6 @@ command to move the file name is
 ```
 ## Why used tanstack and trpc in frontend 
 >TanStack Query complements this by handling caching, background refetching, pagination, and request deduplication automatically, which would otherwise require a lot of custom state management if I used Axios or fetch directly.
+
+## Guest and User bug in Ui rendering
+> TO fixt that remove the redux of user and use the authprovider which will act as a gateway contoller to render ui or blok ui 
