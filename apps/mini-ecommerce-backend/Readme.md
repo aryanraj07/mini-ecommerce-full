@@ -379,3 +379,16 @@ Build admin dashboard
 Add email notifications
 
 Add order lifecycle management
+
+## TYpe sharing in frontend
+
+Frontend must NEVER import backend source code — only compiled types (.d.ts)
+created types.d.ts in backend manually in dist folder
+// so creating a script in backend
+Even better (future upgrade)
+
+Later you can:
+
+publish backend as package (@repo/api)
+use "types": "dist/types.d.ts"
+remove api-types package entirely
