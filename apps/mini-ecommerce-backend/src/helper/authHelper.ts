@@ -1,7 +1,5 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import pkg from "@prisma/client";
-const { PrismaClient } = pkg;
-
+import { PrismaClient } from "@prisma-client/client.js";
 import jwt from "jsonwebtoken";
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,

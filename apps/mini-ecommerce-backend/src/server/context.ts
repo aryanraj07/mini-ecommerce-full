@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma-client/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
