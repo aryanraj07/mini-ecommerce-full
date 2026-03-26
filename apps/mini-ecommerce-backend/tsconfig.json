@@ -33,10 +33,7 @@
     // "noPropertyAccessFromIndexSignature": true,
 
     // Recommended Options
-    "baseUrl": ".",
-    "paths": {
-      "@prisma-client/*": ["src/generated/prisma/*"]
-    },
+
     "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": false,

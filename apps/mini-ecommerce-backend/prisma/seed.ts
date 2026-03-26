@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma-client/client.js";
+import { PrismaClient } from "../src/generated/prisma/client";
 import slugify from "slugify";
 import { PrismaPg } from "@prisma/adapter-pg";
 

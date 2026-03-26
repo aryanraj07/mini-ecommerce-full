@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaClient } from "@prisma-client/client.js";
+import { PrismaClient } from "../generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { randomUUID } from "node:crypto";
 import { getUserFromToken } from "../helper/authHelper.js";
