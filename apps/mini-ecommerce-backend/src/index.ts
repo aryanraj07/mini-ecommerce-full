@@ -15,7 +15,7 @@ import fss from "fs";
 
 import cors from "cors";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/client.js";
 
 const ssl = {
   ca: fss.readFileSync("./ca.pem").toString(),

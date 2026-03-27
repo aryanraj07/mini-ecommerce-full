@@ -3,9 +3,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "tsc-watch --onSuccess \"node dist/index\"",
+    "dev": "tsc-watch --onSuccess \"node dist/src/index\"",
     "build": "prisma generate && tsc && tsx scripts/generate-types.ts",
+    "start": "node dist/src/index.js",
     "seed": "node prisma/seed.js",
     "types": "dist-types/types.d.ts",
     "build:types": "tsc -p tsconfig.types.json"
