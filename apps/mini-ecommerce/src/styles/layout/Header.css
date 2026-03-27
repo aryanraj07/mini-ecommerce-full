@@ -7,13 +7,27 @@
   visibility: hidden;
   transition: opacity 0.2s ease-in-out;
   position: absolute;
-  top: 35px;
-  left: -10px;
+  top: 100%;
+  margin-top: 6px;
+  left: -15px;
   padding: 10px;
   width: 200px;
   background-color: white;
   border-radius: 6px;
+
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(5px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.profile-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 10px;
 }
 .profile-wrapper {
   position: relative;
@@ -22,4 +36,13 @@
 .profile-dropdown:hover {
   opacity: 1;
   visibility: visible;
+}
+.profile-dropdown {
+  pointer-events: none;
+}
+
+.profile-wrapper:hover .profile-dropdown,
+.profile-dropdown:hover {
+  pointer-events: auto;
+  transform: translateY(0);
 }

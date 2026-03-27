@@ -393,9 +393,20 @@ publish backend as package (@repo/api)
 use "types": "dist/types.d.ts"
 remove api-types package entirely
 
-## 🔥 BIG Insight (Most important)
+## BIG Insight (Most important)
 
 Any cookie used in cross-origin (Vercel ↔ Railway) MUST be:
 
 sameSite: "none"
 secure: true
+
+### How Node runs
+
+1. The #1 Rule (Never forget)
+   Node runs compiled JS from dist — NOT your src code
+
+👉 Everything flows from this.
+
+You write → src/
+TypeScript builds → dist/
+Node executes → dist

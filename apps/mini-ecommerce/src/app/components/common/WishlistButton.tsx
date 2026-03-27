@@ -22,8 +22,6 @@ const WishlistButton = ({ id, image }: WishlistButtonProps) => {
   );
   const wishlist = (data as WishlistItem | undefined) ?? [];
   const isWishlisted = new Set(wishlist).has(id);
-  console.log(isWishlisted);
-
   const { addToWishlist, removeFromWishlist } = useWishlist();
 
   const handleWishlist = (e: React.MouseEvent) => {

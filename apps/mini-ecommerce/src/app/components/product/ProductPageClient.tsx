@@ -9,15 +9,10 @@ interface ProductsPageClientProps {
 
 import Filters from "@/app/components/product/Filters";
 import ProductGrid from "./ProductGrid";
-import { useEffect, useMemo } from "react";
+import { startTransition, useEffect, useMemo } from "react";
 import Dropdown from "../Dropdown";
 import { sortedOptions } from "@/constants";
-import {
-  clearFilters,
-  setAvailableFilters,
-  setCategory,
-  setSortValue,
-} from "@/features/filters/filterSlice";
+import { setCategory, setSortValue } from "@/features/filters/filterSlice";
 
 import { useTRPC } from "@/utils/trpc";
 import { useQuery } from "@tanstack/react-query";
@@ -29,20 +24,21 @@ import { buildProductUrl } from "@/utils/buildProductUrls";
 const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const router = useRouter();
   const filters = useAppSelector((state) => state.filter.selected);
+  const router = useRouter();
+
   const { priceRange, category, brand, tag, rating } = filters;
   const page = filters.page;
   const trpc = useTRPC();
-
   const { sort, search } = useAppSelector((state) => state.filter);
+
   const queryInput = useMemo(
     () => ({
-      min: priceRange.min ?? undefined,
-      max: priceRange.max ?? undefined,
-      category,
-      brand,
-      tag,
+      min: priceRange?.min || undefined,
+      max: priceRange?.max || undefined,
+      category: [...category].sort(),
+      brand: [...brand].sort(),
+      tag: [...tag].sort(),
       rating,
       page,
       limit: 20,
@@ -52,22 +48,36 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
     [priceRange, category, brand, tag, rating, page, sort, search],
   );
 
-  const { data, isFetching } = useQuery(
-    trpc.products.getAllProducts.queryOptions(queryInput, {
-      initialData: page === 1 ? initialData : undefined,
-      staleTime: 0,
-      retry: false,
-      refetchOnWindowFocus: false,
-    }),
-  );
-  const { products = [], meta } = data as ProductsOutput;
-  // const products = (data as ProductsOutput)?.products ?? [];
-  // const meta = (data as ProductsOutput)?.meta;
+  const hasUrlFilters = useMemo(() => {
+    return (
+      searchParams.getAll("category").length > 0 ||
+      searchParams.getAll("brand").length > 0 ||
+      searchParams.getAll("tag").length > 0 ||
+      searchParams.get("rating") !== null ||
+      searchParams.get("search") !== null
+    );
+  }, [searchParams]);
+  console.log(hasUrlFilters);
+
+  console.log("QUERY INPUT", queryInput);
+  const queryOptions = trpc.products.getAllProducts.queryOptions(queryInput);
+
+  const { data, isFetching } = useQuery({
+    ...queryOptions,
+    staleTime: 0,
+    initialData: page === 1 && !hasUrlFilters ? initialData : undefined,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+  console.log(data);
+  // const { products = [], meta } = data as ProductsOutput;
+  const products = data?.products ?? [];
+  const meta = data?.meta;
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo({
         top: 0,
-        behavior: "smooth",
+        behavior: "auto",
       });
     }
   }, [page]);
@@ -77,7 +87,9 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
     const current = window.location.pathname + window.location.search;
 
     if (url !== current) {
-      router.replace(url, { scroll: false }); // prevent scroll reset loop
+      startTransition(() => {
+        router.replace(url, { scroll: false });
+      });
     }
   }, [filters, sort, search]);
   const { total = 0 } = meta ?? {};
@@ -91,12 +103,6 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
     }
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (!window.location.pathname.startsWith("/products"))
-        dispatch(clearFilters());
-    };
-  }, []);
   return (
     <div className="flex">
       <div className="w-72 sticky top-0 p-6 ">

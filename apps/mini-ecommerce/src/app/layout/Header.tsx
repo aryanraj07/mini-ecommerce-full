@@ -125,7 +125,7 @@ const Header = () => {
                   <Link href="/">Orders</Link>
                 </li> */}
                   <li>
-                    <Link href="/">Wishlist</Link>
+                    <Link href="/wishlist">Wishlist</Link>
                   </li>
                   {/* <li>
                   <Link href="/">Gift Cards</Link>
