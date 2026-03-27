@@ -16,10 +16,21 @@ import fss from "fs";
 import cors from "cors";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma/client.js";
+process.on("uncaughtException", (err) => {
+  console.error("❌ Uncaught Exception:", err);
+});
 
-const ssl = {
-  ca: fss.readFileSync("./ca.pem").toString(),
-};
+process.on("unhandledRejection", (err) => {
+  console.error("❌ Unhandled Rejection:", err);
+});
+let ssl;
+try {
+  ssl = {
+    ca: fss.readFileSync("./ca.pem").toString(),
+  };
+} catch (err) {
+  console.warn("⚠️ ca.pem not found, skipping SSL");
+}
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
 });
@@ -64,9 +75,6 @@ app.post(
     }
     const event = JSON.parse(rawBody);
     // console.log("FULL EVENT:", JSON.stringify(event, null, 2));
-
-    console.log("✅ Signature Verified");
-    console.log("📦 Event Type:", event.event);
     try {
       if (event.event === "payment.captured") {
         const payment = event.payload.payment.entity;
@@ -99,7 +107,6 @@ app.post(
               orderStatus: "CONFIRMED",
             },
           });
-          console.log("✅ Order Updated:", order.id);
           for (const item of order.items) {
             await tx.product.update({
               where: {
@@ -144,7 +151,13 @@ export const openApiDocument = generateOpenApiDocument(appRouter, {
   baseUrl: "http://localhost:8000/api",
   version: "1.0.0",
 });
-fs.writeFile("openapi-specification.json", JSON.stringify(openApiDocument));
+
+if (process.env.NODE_ENV !== "production") {
+  await fs.writeFile(
+    "openapi-specification.json",
+    JSON.stringify(openApiDocument),
+  );
+}
 app.get("/openapi/json", (req, res) => res.json(openApiDocument));
 app.use(
   "/api",
