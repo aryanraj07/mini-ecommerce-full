@@ -6,7 +6,7 @@ import {
   similarProductsOutput,
 } from "./models.js";
 import { TRPCError } from "@trpc/server";
-import type { Prisma } from "@prisma/client";
+import type { Prisma } from "../../../../generated/prisma/client.js";
 type ProductWithRelations = Prisma.ProductGetPayload<{
   include: {
     category: true;
