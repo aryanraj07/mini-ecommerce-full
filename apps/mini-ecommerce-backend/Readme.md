@@ -392,3 +392,10 @@ Later you can:
 publish backend as package (@repo/api)
 use "types": "dist/types.d.ts"
 remove api-types package entirely
+
+## 🔥 BIG Insight (Most important)
+
+Any cookie used in cross-origin (Vercel ↔ Railway) MUST be:
+
+sameSite: "none"
+secure: true

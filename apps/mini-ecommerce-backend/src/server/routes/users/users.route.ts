@@ -1,5 +1,5 @@
-
 import { protectedProcedure, publicProcedure, router } from "../../trpc.js";
+import { CookieOptions } from "express";
 import {
   getUser,
   sendOtpSchema,
@@ -10,6 +10,13 @@ import bcrypt from "bcryptjs";
 import { TRPCError } from "@trpc/server";
 import { generateAccessToken, generateRefreshToken } from "./generate-token.js";
 import jwt from "jsonwebtoken";
+const isProd = process.env.NODE_ENV === "production";
+const clearCookieOptions: CookieOptions = {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? "none" : "lax",
+  path: "/",
+};
 export const userRouter = router({
   sendOtp: publicProcedure
     .meta({
@@ -136,12 +143,10 @@ export const userRouter = router({
       //   sameSite: "lax",
       //   maxAge: 30 * 24 * 60 * 60 * 1000,
       // });
-      const isProd = process.env.NODE_ENV === "production";
 
       ctx.res.cookie("accessToken", accessToken, {
         httpOnly: true,
         secure: isProd,
-
         sameSite: isProd ? "none" : "lax",
         maxAge: 24 * 60 * 60 * 1000,
       });
@@ -151,7 +156,8 @@ export const userRouter = router({
         sameSite: isProd ? "none" : "lax",
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
-      ctx.res.clearCookie("guestId");
+
+      ctx.res.clearCookie("guestId", cookieOptions);
       return {
         message: "Login successful",
       };
@@ -227,9 +233,15 @@ export const userRouter = router({
           },
         });
       }
+      const cookieOptions: CookieOptions = {
+        httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? "none" : "lax",
+        path: "/",
+      };
 
-      ctx.res.clearCookie("accessToken");
-      ctx.res.clearCookie("refreshToken");
+      ctx.res.clearCookie("accessToken", cookieOptions);
+      ctx.res.clearCookie("refreshToken", cookieOptions);
       return { message: "Logged out" };
     }),
 });

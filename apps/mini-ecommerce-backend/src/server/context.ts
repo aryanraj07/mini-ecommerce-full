@@ -1,12 +1,13 @@
 import "dotenv/config";
 import { PrismaClient } from "../../generated/prisma/client.js";
-import { PrismaPg } from "@prisma/adapter-pg";
+
+import * as adapterPg from "@prisma/adapter-pg";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { randomUUID } from "node:crypto";
 import { getUserFromToken } from "../helper/authHelper.js";
-
-const adapter = new PrismaPg({
+const isProd = process.env.NODE_ENV === "production";
+const adapter = new adapterPg.PrismaPg({
   connectionString: process.env.DATABASE_URL!,
 });
 
@@ -28,8 +29,9 @@ export const createContext = async ({
 
     res.cookie("guestId", guestId, {
       httpOnly: true,
-      sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000,
     });
   }
   return { prisma, user, req, res, guestId };
