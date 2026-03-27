@@ -157,7 +157,7 @@ export const userRouter = router({
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
 
-      ctx.res.clearCookie("guestId", cookieOptions);
+      ctx.res.clearCookie("guestId", clearCookieOptions);
       return {
         message: "Login successful",
       };
@@ -233,15 +233,9 @@ export const userRouter = router({
           },
         });
       }
-      const cookieOptions: CookieOptions = {
-        httpOnly: true,
-        secure: isProd,
-        sameSite: isProd ? "none" : "lax",
-        path: "/",
-      };
 
-      ctx.res.clearCookie("accessToken", cookieOptions);
-      ctx.res.clearCookie("refreshToken", cookieOptions);
+      ctx.res.clearCookie("accessToken", clearCookieOptions);
+      ctx.res.clearCookie("refreshToken", clearCookieOptions);
       return { message: "Logged out" };
     }),
 });
