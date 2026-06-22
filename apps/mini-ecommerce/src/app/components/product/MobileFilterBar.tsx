@@ -2,6 +2,7 @@
 import { useState } from "react";
 import MobileFilters from "./MobileFilters";
 import MobileSort from "./MobileSort";
+import { ArrowUpDown, FunnelPlus } from "lucide-react";
 
 export default function MobileFilterBar() {
   const [showFilters, setShowFilters] = useState(false);
@@ -13,10 +14,10 @@ export default function MobileFilterBar() {
           onClick={() => setShowSort(true)}
           className="font-medium border-r"
         >
-          Sort
+          <ArrowUpDown /> Sort
         </button>
         <button onClick={() => setShowFilters(true)} className="font-medium">
-          Filters
+          <FunnelPlus /> Filters
         </button>
       </div>
       <MobileFilters open={showFilters} onClose={() => setShowFilters(false)} />
