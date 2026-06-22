@@ -1,11 +1,10 @@
 "use client";
-import { debounce } from "@/utils/debounce";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaRegUser, FaSearch } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import "@/styles/layout/Header.css";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch } from "@/hooks/hooks";
 
 import { CiHeart } from "react-icons/ci";
 

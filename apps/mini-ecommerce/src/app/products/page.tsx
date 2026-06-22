@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import ProductSkeleton from "@/app/components/skelton/ProductSkelton";
 import ProductPageClient from "@/app/components/product/ProductPageClient";
 import { getProducts } from "@/helpers/getProducts";
+import MobileFilterBar from "../components/product/MobileFilterBar";
 
 export default async function Page() {
   // "use cache";
@@ -20,6 +21,9 @@ export default async function Page() {
   return (
     <div className="container-custom">
       <ProductPageClient initialData={initialData} />
+      <div className="fixed bottom-1">
+        <MobileFilterBar />
+      </div>
     </div>
   );
 }

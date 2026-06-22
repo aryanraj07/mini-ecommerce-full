@@ -105,7 +105,7 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
 
   return (
     <div className="flex">
-      <div className="w-72 sticky top-0 p-6 ">
+      <div className="w-72 sticky top-0 p-6 hidden md:block">
         <Filters />
       </div>
       <div className="flex-1">
