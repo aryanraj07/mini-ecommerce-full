@@ -42,7 +42,9 @@ model Product {
   tags                 ProductTag[]
   reviews              Review[]
   wishlistItems        WishlistItem[]
-  
+    @@index([createdAt])
+    @@index([price])
+    @@index([rating])
   @@index([categoryId])
   @@index([sellerId])
   @@index([brandId])

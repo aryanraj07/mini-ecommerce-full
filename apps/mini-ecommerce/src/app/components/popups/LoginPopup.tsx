@@ -257,7 +257,6 @@ const LoginPopup = () => {
             >
               Verify & Login
             </button>
-
             {timeLeft && timeLeft > 0 ? (
               <p className="text-sm text-gray-500 mt-2">
                 Resend OTP in {Math.floor(timeLeft / 60)}:

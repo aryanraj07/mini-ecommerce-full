@@ -3,8 +3,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsc-watch --onSuccess \"node dist/src/index\"",
     "build": "prisma generate && tsc && tsx scripts/generate-types.ts",
+    "dev": "tsx watch src/index.ts",
     "start": "node dist/src/index.js",
     "seed": "node prisma/seed.js",
     "types": "dist-types/types.d.ts",

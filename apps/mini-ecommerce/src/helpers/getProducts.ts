@@ -1,5 +1,5 @@
 // getProducts.ts
-
+import { cacheLife } from "next/cache";
 import { createServerTRPCClient } from "@/utils/fetchServerData";
 
 export const defaultProductQuery = {
@@ -16,8 +16,9 @@ export const defaultProductQuery = {
 };
 
 export async function getProducts() {
+  "use cache";
+  cacheLife("minutes");
   const trpc = createServerTRPCClient(null);
-
   const result = await trpc.products.getAllProducts.query(defaultProductQuery);
   return result;
 }

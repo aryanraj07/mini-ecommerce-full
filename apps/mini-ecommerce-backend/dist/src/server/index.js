@@ -6,6 +6,7 @@ import { wishListRouter } from "./routes/wishlist/wishlist.routes.js";
 import { cartRouter } from "./routes/cart/cart.routes.js";
 import { orderRouter } from "./routes/order/order.routes.js";
 // root router
+console.log("App router");
 export const appRouter = router({
     products: productRouter,
     filters: filterRouter,

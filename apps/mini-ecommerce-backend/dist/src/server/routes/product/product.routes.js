@@ -29,6 +29,7 @@ export const productRouter = router({
     }))
         .output(getAllProductOutput)
         .query(async ({ ctx, input }) => {
+        console.log("products rendring");
         const { page, limit, category, brand, tag, min, max, rating, search, sort, ids, } = input;
         const where = {};
         if (search) {
@@ -76,23 +77,26 @@ export const productRouter = router({
             }
         })();
         // query
-        const rawProducts = await ctx.prisma.product.findMany({
-            where,
-            skip: (page - 1) * limit,
-            take: limit,
-            orderBy,
-            include: {
-                category: true,
-                brand: true,
-                reviews: true,
-                tags: {
-                    include: {
-                        tag: true,
+        const p2 = Date.now();
+        const [rawProducts, total] = await Promise.all([
+            ctx.prisma.product.findMany({
+                where,
+                skip: (page - 1) * limit,
+                take: limit,
+                orderBy,
+                include: {
+                    category: true,
+                    brand: true,
+                    tags: {
+                        include: {
+                            tag: true,
+                        },
                     },
                 },
-            },
-        });
-        const total = await ctx.prisma.product.count({ where });
+            }),
+            ctx.prisma.product.count({ where }),
+        ]);
+        console.log("count:", Date.now() - p2);
         const products = rawProducts.map((p) => {
             const price = Number(p.price);
             const discountPercentage = p.discountPercentage ?? 0;

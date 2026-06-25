@@ -38,6 +38,8 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({
   adapter,
 });
+console.log("Hes");
+
 const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
@@ -55,6 +57,7 @@ app.use(
     credentials: true,
   }),
 );
+console.log("He testing");
 
 app.use(cookieParser());
 app.post(
@@ -176,5 +179,5 @@ app.use(
 const PORT = Number(process.env.PORT) || 8000;
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running and also on port ${PORT}`);
 });

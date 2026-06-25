@@ -103,24 +103,27 @@ export const productRouter = router({
         }
       })();
       // query
-
-      const rawProducts = await ctx.prisma.product.findMany({
-        where,
-        skip: (page - 1) * limit,
-        take: limit,
-        orderBy,
-        include: {
-          category: true,
-          brand: true,
-          reviews: true,
-          tags: {
-            include: {
-              tag: true,
+      const p2 = Date.now();
+      const [rawProducts, total] = await Promise.all([
+        ctx.prisma.product.findMany({
+          where,
+          skip: (page - 1) * limit,
+          take: limit,
+          orderBy,
+          include: {
+            category: true,
+            brand: true,
+            tags: {
+              include: {
+                tag: true,
+              },
             },
           },
-        },
-      });
-      const total = await ctx.prisma.product.count({ where });
+        }),
+
+        ctx.prisma.product.count({ where }),
+      ]);
+
       const products = rawProducts.map((p) => {
         const price = Number(p.price);
 

@@ -33,7 +33,6 @@ export default async function fetchData<T = unknown>(
   ) {
     return cache[finalUrl].data as T;
   }
-  console.log(finalUrl);
 
   try {
     const res = await axios(url, {

@@ -57,9 +57,7 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
       searchParams.get("search") !== null
     );
   }, [searchParams]);
-  console.log(hasUrlFilters);
 
-  console.log("QUERY INPUT", queryInput);
   const queryOptions = trpc.products.getAllProducts.queryOptions(queryInput);
 
   const { data, isFetching } = useQuery({
@@ -69,7 +67,7 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
     refetchOnWindowFocus: false,
     retry: false,
   });
-  console.log(data);
+
   // const { products = [], meta } = data as ProductsOutput;
   const products = data?.products ?? [];
   const meta = data?.meta;
@@ -95,8 +93,6 @@ const ProductPageClient = ({ initialData }: ProductsPageClientProps) => {
   const { total = 0 } = meta ?? {};
   useEffect(() => {
     const categoryParam = searchParams.get("category");
-
-    console.log(categoryParam);
 
     if (categoryParam && categoryParam !== category[0]) {
       dispatch(setCategory([categoryParam]));
